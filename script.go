@@ -6,7 +6,7 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-func (p *Pool) RunScript(ctx context.Context, script *redis.Script, keys []string, args ...any) (res string, err error) {
+func (p *Pool) RunScript(ctx context.Context, script *redis.Script, keys []string, args ...any) (res any, err error) {
 	var (
 		cmd = script.Run(ctx, p.client, keys, args)
 	)
@@ -15,5 +15,5 @@ func (p *Pool) RunScript(ctx context.Context, script *redis.Script, keys []strin
 		WriteLog(cmd.Err(), cmd.String(), p.opt)
 	}
 
-	return cmd.String(), cmd.Err()
+	return cmd.Val(), cmd.Err()
 }

@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
-	"strconv"
 	"time"
 
 	"github.com/redis/go-redis/v9"
@@ -32,7 +31,6 @@ func (p *Pool) Acquire(ctx context.Context, key string, lockSeconds int64) (toke
 	if ok {
 		token = t
 	}
-
 	return
 }
 
@@ -46,8 +44,8 @@ func (p *Pool) HasLock(ctx context.Context, key string) (hasLock bool, err error
 }
 
 func (p *Pool) Release(ctx context.Context, key string, token int64) (delNum int64, err error) {
-	var res string
-	res, err = p.RunScript(ctx, delTokenScript, []string{key}, token)
-	delNum, _ = strconv.ParseInt(res, 10, 64)
+	var res any
+	res, err = p.RunScript(ctx, delTokenScript, []string{fmt.Sprintf(lockFormat, key)}, token)
+	delNum, _ = res.(int64)
 	return
 }
