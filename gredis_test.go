@@ -137,3 +137,26 @@ func TestPool_GetBit(t *testing.T) {
 	}
 	t.Logf("BitCount(%v, %v) => %d", key, offset, num)
 }
+
+func TestPool_ConfigGet(t *testing.T) {
+	var (
+		red         = Get(redKey)
+		ctx, cancel = context.WithTimeout(context.Background(), time.Second*3)
+	)
+
+	defer func() {
+		cancel()
+	}()
+
+	data, err := red.ConfigGet(ctx, "timeout")
+	if err != nil {
+		t.Fatalf("ConfigGet failed: %v", err)
+	}
+	t.Logf("config: %d", data.ToInt64("timeout"))
+
+	res, err := red.ConfigSet(ctx, "timeout", "1")
+	if err != nil {
+		t.Fatalf("ConfigSet failed: %v", err)
+	}
+	t.Logf("configSet: %t", res)
+}
