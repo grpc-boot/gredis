@@ -1,6 +1,8 @@
 package gredis
 
-import "github.com/redis/go-redis/v9"
+import (
+	"github.com/redis/go-redis/v9"
+)
 
 const (
 	OK      = `OK`

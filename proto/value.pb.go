@@ -21,29 +21,30 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Value struct {
+type CacheItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	CreatedAt     int64                  `protobuf:"varint,1,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
 	UpdatedAt     int64                  `protobuf:"varint,2,opt,name=updatedAt,proto3" json:"updatedAt,omitempty"`
-	Data          []byte                 `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	UpdatedCount  int64                  `protobuf:"varint,3,opt,name=updatedCount,proto3" json:"updatedCount,omitempty"`
+	Data          []byte                 `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Value) Reset() {
-	*x = Value{}
+func (x *CacheItem) Reset() {
+	*x = CacheItem{}
 	mi := &file_value_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Value) String() string {
+func (x *CacheItem) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Value) ProtoMessage() {}
+func (*CacheItem) ProtoMessage() {}
 
-func (x *Value) ProtoReflect() protoreflect.Message {
+func (x *CacheItem) ProtoReflect() protoreflect.Message {
 	mi := &file_value_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,26 +56,33 @@ func (x *Value) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Value.ProtoReflect.Descriptor instead.
-func (*Value) Descriptor() ([]byte, []int) {
+// Deprecated: Use CacheItem.ProtoReflect.Descriptor instead.
+func (*CacheItem) Descriptor() ([]byte, []int) {
 	return file_value_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Value) GetCreatedAt() int64 {
+func (x *CacheItem) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
 	}
 	return 0
 }
 
-func (x *Value) GetUpdatedAt() int64 {
+func (x *CacheItem) GetUpdatedAt() int64 {
 	if x != nil {
 		return x.UpdatedAt
 	}
 	return 0
 }
 
-func (x *Value) GetData() []byte {
+func (x *CacheItem) GetUpdatedCount() int64 {
+	if x != nil {
+		return x.UpdatedCount
+	}
+	return 0
+}
+
+func (x *CacheItem) GetData() []byte {
 	if x != nil {
 		return x.Data
 	}
@@ -85,11 +93,12 @@ var File_value_proto protoreflect.FileDescriptor
 
 const file_value_proto_rawDesc = "" +
 	"\n" +
-	"\vvalue.proto\x12\x05proto\"W\n" +
-	"\x05Value\x12\x1c\n" +
+	"\vvalue.proto\x12\x05proto\"\x7f\n" +
+	"\tCacheItem\x12\x1c\n" +
 	"\tcreatedAt\x18\x01 \x01(\x03R\tcreatedAt\x12\x1c\n" +
-	"\tupdatedAt\x18\x02 \x01(\x03R\tupdatedAt\x12\x12\n" +
-	"\x04data\x18\x03 \x01(\fR\x04dataB\bZ\x06/protob\x06proto3"
+	"\tupdatedAt\x18\x02 \x01(\x03R\tupdatedAt\x12\"\n" +
+	"\fupdatedCount\x18\x03 \x01(\x03R\fupdatedCount\x12\x12\n" +
+	"\x04data\x18\x04 \x01(\fR\x04dataB\bZ\x06/protob\x06proto3"
 
 var (
 	file_value_proto_rawDescOnce sync.Once
@@ -105,7 +114,7 @@ func file_value_proto_rawDescGZIP() []byte {
 
 var file_value_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_value_proto_goTypes = []any{
-	(*Value)(nil), // 0: proto.Value
+	(*CacheItem)(nil), // 0: proto.CacheItem
 }
 var file_value_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

@@ -2,8 +2,9 @@ syntax = "proto3";
 package proto;
 option go_package = "/proto";
 
-message Value {
+message CacheItem {
   int64 createdAt = 1;
   int64 updatedAt = 2;
-  bytes data   = 3;
+  int64 updatedCount = 3;
+  bytes data   = 4;
 }
