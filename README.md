@@ -1,5 +1,11 @@
 # gredis
 
+- TOC
+    - [SetLog](#SetLog)
+    - [Traffic](#Traffic)
+    - [Cache](#Cache)
+    - [Geo](#Geo)
+
 ### SetLog
 
 ```go
