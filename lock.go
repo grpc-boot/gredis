@@ -14,7 +14,7 @@ const (
 )
 
 var (
-	delTokenScript = redis.NewScript(`if redis.call('get', KEYS[1]) == ARGV[1]
+	delLockScript = redis.NewScript(`if redis.call('get', KEYS[1]) == ARGV[1]
 	then
 		return redis.call('del', KEYS[1])
 	end
@@ -45,7 +45,7 @@ func (p *Pool) HasLock(ctx context.Context, key string) (hasLock bool, err error
 
 func (p *Pool) Release(ctx context.Context, key string, token int64) (delNum int64, err error) {
 	var res any
-	res, err = p.RunScript(ctx, delTokenScript, []string{fmt.Sprintf(lockFormat, key)}, token)
+	res, err = p.RunScript(ctx, delLockScript, []string{fmt.Sprintf(lockFormat, key)}, token)
 	delNum, _ = res.(int64)
 	return
 }

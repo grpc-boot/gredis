@@ -26,7 +26,7 @@ func (p *Pool) InfoMap(ctx context.Context, sections ...string) (info map[string
 	return cmd.Result()
 }
 
-func (p *Pool) ConfigGet(ctx context.Context, parameter string) (res Param, err error) {
+func (p *Pool) ConfigGet(ctx context.Context, parameter string) (res ConfigParam, err error) {
 	var (
 		cmd = p.client.ConfigGet(ctx, parameter)
 	)
