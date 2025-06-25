@@ -16,6 +16,10 @@ func NewPool(opt *Option) *Pool {
 	}
 }
 
+func (p *Pool) Client() *redis.Client {
+	return p.client
+}
+
 func (p *Pool) Option() *Option {
 	return p.opt
 }
