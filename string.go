@@ -71,6 +71,18 @@ func (p *Pool) Get(ctx context.Context, key string) (value string, err error) {
 	return cmd.Result()
 }
 
+func (p *Pool) GetSet(ctx context.Context, key string, val any) (value string, err error) {
+	var (
+		cmd = p.client.GetSet(ctx, key, val)
+	)
+
+	if !IsNil(cmd.Err()) {
+		WriteLog(cmd.Err(), cmd.String(), p.opt)
+	}
+
+	return cmd.Result()
+}
+
 func (p *Pool) GetBytes(ctx context.Context, key string) (value []byte, err error) {
 	var (
 		cmd = p.client.Get(ctx, key)
