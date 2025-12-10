@@ -173,3 +173,27 @@ func (p *Pool) ZScan(ctx context.Context, key string, cursor uint64, match strin
 
 	return cmd.Result()
 }
+
+func (p *Pool) ZRemRangeByRank(ctx context.Context, key string, start, stop int64) (delNum int64, err error) {
+	var (
+		cmd = p.client.ZRemRangeByRank(ctx, key, start, stop)
+	)
+
+	if !IsNil(cmd.Err()) {
+		WriteLog(cmd.Err(), cmd.String(), p.opt)
+	}
+
+	return cmd.Result()
+}
+
+func (p *Pool) ZRemRangeByScore(ctx context.Context, key, min, max string) (delNum int64, err error) {
+	var (
+		cmd = p.client.ZRemRangeByScore(ctx, key, min, max)
+	)
+
+	if !IsNil(cmd.Err()) {
+		WriteLog(cmd.Err(), cmd.String(), p.opt)
+	}
+
+	return cmd.Result()
+}
